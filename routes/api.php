@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+/*
+ * Authentication Routes
+ * */
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('/register', [AuthController::class, 'register'])
+        ->name('register');
+
+    Route::post('/login', [AuthController::class, 'login'])
+        ->name('login');
+
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::get('/user', [AuthController::class, 'user'])
+            ->name('user');
+
+        Route::post('/logout', [AuthController::class, 'logout'])
+            ->name('logout');
+
+        Route::post('/logout-all-devices', [AuthController::class, 'logoutAllDevices'])
+            ->name('logoutAllDevices');
+    });
 });
