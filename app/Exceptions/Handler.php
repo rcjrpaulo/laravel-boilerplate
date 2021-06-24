@@ -102,6 +102,10 @@ class Handler extends ExceptionHandler
             if ($exceptionClass == 'App\Exceptions\ContinueGatewaysLoopException') {
                 session()->flash('error', $e->getMessage());
             }
+
+            session()->flash('error', request()->get('unexpected_error_message', 'Houve um erro inesperado'));
+
+            return response()->view('errors.error', [], 500);
         });
 
         $this->renderable(function (Throwable $e) {
@@ -119,6 +123,8 @@ class Handler extends ExceptionHandler
             }
 
             session()->flash('error', request()->get('unexpected_error_message', 'Houve um erro inesperado'));
+
+            return response()->view('errors.error', [], 500);
         });
     }
 
