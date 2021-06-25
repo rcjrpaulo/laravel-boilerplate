@@ -81,50 +81,61 @@ class Handler extends ExceptionHandler
                     return response()->json(['error' => $e->getMessage()], $e->getCode());
                 }
 
-                if ($exceptionClass == 'App\Exceptions\ContinueGatewaysLoopException') {
-                    return response()->json(['error' => $e->getMessage()], $e->getCode());
-                }
-
                 $statusCode = method_exists($e, 'getCode') && !empty($e->getCode()) ? $e->getCode() : 500;
                 $statusCode = $statusCode > 500 ? 500 : $statusCode;
 
-                if (env('APP_ENV') == 'local') {
+                if (app()->environment() == 'local') {
                     return response()->json(['error' => $e->getMessage()], 500);
                 }
 
                 return response()->json(['error' => request()->get('unexpected_error_message', 'Houve um erro inesperado')], $statusCode);
             }
 
-            if ($exceptionClass == 'App\Exceptions\ApiResponseNotifyClientException') {
+            if ($exceptionClass == 'App\Exceptions\WebResponseNotifyClientException') {
                 session()->flash('error', $e->getMessage());
             }
 
-            if ($exceptionClass == 'App\Exceptions\ContinueGatewaysLoopException') {
-                session()->flash('error', $e->getMessage());
+            if ($exceptionClass != 'Illuminate\Validation\ValidationException') {
+
+                if ($exceptionClass != 'App\Exceptions\WebResponseNotifyClientException') {
+                    session()->flash('error', request()->get('unexpected_error_message', 'Houve um erro inesperado'));
+                }
+
+                return response()->view('errors.error', [], 500);
             }
-
-            session()->flash('error', request()->get('unexpected_error_message', 'Houve um erro inesperado'));
-
-            return response()->view('errors.error', [], 500);
         });
 
         $this->renderable(function (Throwable $e) {
             $this->storeExceptionInBootbox($e);
+            $exceptionClass = get_class($e);
 
             if (request()->is('api/*')) {
                 $statusCode = method_exists($e, 'getCode') && !empty($e->getCode()) ? $e->getCode() : 500;
                 $statusCode = $statusCode > 500 ? 500 : $statusCode;
 
-                if (env('APP_ENV') == 'local') {
+                if ($exceptionClass == 'App\Exceptions\ApiResponseNotifyClientException') {
+                    return response()->json(['error' => $e->getMessage()], $e->getCode());
+                }
+
+                if (app()->environment() == 'local') {
                     return response()->json(['error' => $e->getMessage()], 500);
                 }
 
                 return response()->json(['error' => request()->get('unexpected_error_message', 'Houve um erro inesperado')], $statusCode);
             }
 
-            session()->flash('error', request()->get('unexpected_error_message', 'Houve um erro inesperado'));
+            if ($exceptionClass == 'App\Exceptions\WebResponseNotifyClientException') {
+                session()->flash('error', $e->getMessage());
+            }
 
-            return response()->view('errors.error', [], 500);
+            if ($exceptionClass != 'Illuminate\Validation\ValidationException') {
+
+                if ($exceptionClass != 'App\Exceptions\WebResponseNotifyClientException') {
+                    session()->flash('error', request()->get('unexpected_error_message', 'Houve um erro inesperado'));
+                }
+
+                return response()->view('errors.error', [], 500);
+            }
         });
     }
 
