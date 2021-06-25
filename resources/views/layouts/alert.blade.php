@@ -16,7 +16,7 @@
     </div>
 @endif
 
-@if($errors)
+@if(! empty($errors) && is_array($errors))
     @foreach($errors as $error)
         <div class="alert alert-danger">{{ $error }}</div>
     @endforeach
