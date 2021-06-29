@@ -19,6 +19,7 @@ class CreatePermissionsTable extends Migration
             $table->string('label');
             $table->string('group_label');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
