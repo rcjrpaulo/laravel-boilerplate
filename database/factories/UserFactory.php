@@ -27,6 +27,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name,
             'email' => $this->faker->safeEmail,
             'role_id' => Role::first()->id ?? Role::factory()->create(),
+            'photo' => null,
             'email_verified_at' => $this->faker->dateTime(),
             'password' => bcrypt($this->faker->password),
             'remember_token' => Str::random(10),
