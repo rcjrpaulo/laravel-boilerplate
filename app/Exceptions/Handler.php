@@ -91,11 +91,12 @@ class Handler extends ExceptionHandler
                 return response()->json(['error' => request()->get('unexpected_error_message', 'Houve um erro inesperado')], $statusCode);
             }
 
+
             if ($exceptionClass == 'App\Exceptions\WebResponseNotifyClientException') {
                 session()->flash('error', $e->getMessage());
             }
 
-            if ($exceptionClass != 'Illuminate\Validation\ValidationException') {
+            if ($exceptionClass != 'Illuminate\Validation\ValidationException' && $exceptionClass != 'Illuminate\Auth\AuthenticationException') {
 
                 if ($exceptionClass != 'App\Exceptions\WebResponseNotifyClientException') {
                     session()->flash('error', request()->get('unexpected_error_message', 'Houve um erro inesperado'));
@@ -106,6 +107,7 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (Throwable $e) {
+
             $this->storeExceptionInBootbox($e);
             $exceptionClass = get_class($e);
 
@@ -128,7 +130,7 @@ class Handler extends ExceptionHandler
                 session()->flash('error', $e->getMessage());
             }
 
-            if ($exceptionClass != 'Illuminate\Validation\ValidationException') {
+            if ($exceptionClass != 'Illuminate\Validation\ValidationException' && $exceptionClass != 'Illuminate\Auth\AuthenticationException') {
 
                 if ($exceptionClass != 'App\Exceptions\WebResponseNotifyClientException') {
                     session()->flash('error', request()->get('unexpected_error_message', 'Houve um erro inesperado'));
