@@ -40,7 +40,7 @@ class UserService
 
         $user = User::create($data);
 
-        if (request()->hasFile('photo')) {
+        if (request()->hasFile('photo') && request()->file('photo')->isValid()) {
             $photo = request()->photo->store("files/user/{$user->id}");
             $user->update(['photo' => $photo]);
         }
@@ -54,7 +54,7 @@ class UserService
             'unexpected_error_message' => 'Oops ! Houve um problema ao tentar atualizar usuário',
         ]);
 
-        if (request()->hasFile('photo')) {
+        if (request()->hasFile('photo') && request()->file('photo')->isValid()) {
             $photo = request()->photo->store("files/user/{$user->id}");
             $data['photo'] = $photo;
             if (Storage::exists($user->photo)) {
