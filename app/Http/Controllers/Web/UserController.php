@@ -54,7 +54,7 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $updateUserRequest, User $user)
     {
-        $user = (new UpdateUserService())->update($user, $updateUserRequest->validated());
+        $user = (new UpdateUserService())->run($user, $updateUserRequest->validated());
 
         session()->flash('success', 'Usuário atualizado com sucesso !');
 
@@ -63,7 +63,7 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        (new DestroyUserService())->destroy($user);
+        (new DestroyUserService())->run($user);
 
         session()->flash('success', 'Usuário deletado com sucesso !');
 
