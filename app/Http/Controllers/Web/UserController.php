@@ -3,83 +3,68 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
+use App\Models\Role;
+use App\Models\User;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $userService;
+
+    public function __construct()
+    {
+        $this->userService = new UserService();
+    }
+
     public function index()
     {
-        //
+        $users = $this->userService->index(
+            request()->query(),
+            ['role']
+        );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $roles = Role::get(['id', 'label']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreUserRequest $storeUserRequest)
+    {
+        $user = $this->userService->store($storeUserRequest->validated());
+
+        session()->flash('success', 'Usuário criado com sucesso !');
+
+        return redirect(route('users.show', $user));
+    }
+
+    public function show(User $user)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::get(['id', 'label']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(UpdateUserRequest $updateUserRequest, User $user)
     {
-        //
+        $user = $this->userService->update($user, $updateUserRequest->validated());
+
+        session()->flash('success', 'Usuário atualizado com sucesso !');
+
+        return redirect(route('users.edit', $user));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy(User $user)
     {
-        //
-    }
+        $this->userService->destroy($user);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        session()->flash('success', 'Usuário deletado com sucesso !');
+
+        return redirect(route('users.index'));
     }
 }
