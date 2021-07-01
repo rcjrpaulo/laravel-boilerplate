@@ -72,8 +72,8 @@ class User extends Authenticatable
      */
     public function getPhotoUrlAttribute()
     {
-        if (empty($this->photo) || Storage::exists($this->photo)) {
-            return 'images/profile.png';
+        if (empty($this->photo) || ! Storage::exists($this->photo)) {
+            return '/images/profile.png';
         }
 
         return Storage::url($this->photo);

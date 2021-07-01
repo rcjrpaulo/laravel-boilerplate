@@ -61,7 +61,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="{{ route('dashboard') }}" class="brand-link">
                 <span class="brand-text font-weight-light">
-                    <img loading="lazy" src="dist/img/AdminLTELogo.png" width="50">
+                    <img loading="lazy" src="{{ asset('dist/img/AdminLTELogo.png') }}" width="50">
                 </span>
             </a>
             <div class="sidebar"><div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -139,7 +139,7 @@
 
                         <div class="col-12 my-2">
                             <div class="image">
-                                <img width="30" src="{{ auth()->user()->photoUrl ?? 'images/profile.png' }}" alt="User Image" class="img-circle elevation-2">
+                                <img width="30" src="{{ auth()->user()->photoUrl ?? '/images/profile.png' }}" alt="User Image" class="img-circle elevation-2">
                             </div>
                         </div>
 
