@@ -13,7 +13,7 @@ class ListUserService
     public function run(array $filters = [], $relations = [], bool $pagination = false, int $itemsPerPage = 20)
     {
         request()->merge([
-            'unexpected_error_message' => 'Oops ! Houve um problema ao tentar criar usuário',
+            'unexpected_error_message' => 'Oops ! Houve um problema ao tentar listar usuários',
         ]);
 
         return User::filterByName(Arr::get($filters, 'name'))

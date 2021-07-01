@@ -3,83 +3,76 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Role\StoreRoleRequest;
+use App\Http\Requests\Role\UpdateRoleRequest;
+use App\Models\Role;
+use App\Services\Roles\DestroyRolesService;
+use App\Services\Roles\ListRolesService;
+use App\Services\Roles\StoreRolesService;
+use App\Services\Roles\UpdateRolesService;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $roles = (new ListRolesService())->run(
+            request()->query(),
+            []
+        );
+
+        return view('roles.index', compact('roles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('roles.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreRoleRequest $storeRoleRequest)
     {
-        //
+        $role = (new StoreRolesService())->run($storeRoleRequest->validated());
+
+        session()->flash('success', 'Papel criado com sucesso !');
+
+        return redirect(route('roles.show', $role));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Role $role)
     {
-        //
+        return view('roles.show', compact('role'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        return view('roles.edit', compact('role'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateRoleRequest $updateRoleRequest, Role $role)
     {
-        //
+        $role = (new UpdateRolesService())->run($role, $updateRoleRequest->validated());
+
+        session()->flash('success', 'Papel atualizado com sucesso !');
+
+        return redirect(route('roles.edit', $role));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        (new DestroyRolesService())->run($role);
+
+        session()->flash('success', 'Papel deletado com sucesso !');
+
+        return redirect(route('users.index'));
+    }
+
+    public function updatePermissions(Role $role)
+    {
+        $role->permissions()->sync(request()->get('permissions', []));
+
+        session()->flash('success', 'Permissões do papel atualizadas com sucesso !');
+
+        return back();
     }
 }

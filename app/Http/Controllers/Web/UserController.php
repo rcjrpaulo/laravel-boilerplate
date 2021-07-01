@@ -20,11 +20,15 @@ class UserController extends Controller
             request()->query(),
             ['role']
         );
+
+        return view('users.index', compact('users'));
     }
 
     public function create()
     {
         $roles = Role::get(['id', 'label']);
+
+        return view('users.create', compact('roles'));
     }
 
     public function store(StoreUserRequest $storeUserRequest)
@@ -38,12 +42,14 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        //
+        return view('users.show', compact('user'));
     }
 
     public function edit(User $user)
     {
         $roles = Role::get(['id', 'label']);
+
+        return view('users.edit', compact('user', 'roles'));
     }
 
     public function update(UpdateUserRequest $updateUserRequest, User $user)
