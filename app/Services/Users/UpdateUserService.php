@@ -26,6 +26,8 @@ class UpdateUserService
 
         if (Arr::get($data, 'password', false)) {
             $data['password'] = bcrypt($data['password']);
+        } else {
+            unset($data['password']);
         }
 
         $user->update($data);
