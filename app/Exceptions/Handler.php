@@ -130,6 +130,10 @@ class Handler extends ExceptionHandler
                 session()->flash('error', $e->getMessage());
             }
 
+            if (app()->environment() == 'local') {
+                dd($e);
+            }
+
             if ($exceptionClass != 'Illuminate\Validation\ValidationException' && $exceptionClass != 'Illuminate\Auth\AuthenticationException') {
 
                 if ($exceptionClass != 'App\Exceptions\WebResponseNotifyClientException') {
