@@ -105,7 +105,7 @@
         </div>
 
         <footer class="main-footer text-center">
-            <span class="text-muted"><span>Feito com muito</span> <span><i class="fa fa-heart text-danger fa-pulse"></i></span> <span>pela <a href="http://www.agily.com.br" target="_blank">Agily Tecnologia</a></span></span>
+            <span class="text-muted"><span>Feito com muito</span> <span><i class="fa fa-heart text-danger"></i></span> <span>pela <a href="http://www.agily.com.br" target="_blank">Agily Tecnologia</a></span></span>
         </footer>
 
         <div id="sidebar-overlay"></div>
