@@ -50,7 +50,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li>
-                    <form action="/logout" method="POST">
+                    <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-white">Sair</button>
                     </form>
@@ -59,7 +59,7 @@
         </nav>
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="javascript:void(0)" class="brand-link">
+            <a href="{{ route('dashboard') }}" class="brand-link">
                 <span class="brand-text font-weight-light">
                     <img loading="lazy" src="dist/img/AdminLTELogo.png" width="50">
                 </span>
@@ -78,15 +78,20 @@
                 <nav class="mt-2">
                     <ul data-widget="treeview" role="menu" data-accordion="false" class="nav nav-pills nav-sidebar flex-column pt-2">
                         <li class="nav-item">
-                            <a href="/" class="nav-link my-2 text-white">
+                            <a href="{{ route('dashboard') }}" class="nav-link my-2 text-white">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
 
                         <li class="nav-header">PERMISSÕES</li>
-                        <li class="nav-item"><a href="/admin/roles" class="nav-link my-2 text-white"><i class="nav-icon fas fa-plus-square"></i> <p>Papéis</p></a></li>
-                        <li class="nav-item"><a href="/admin/users" class="nav-link my-2 text-white"><i class="nav-icon fas fa-user-alt"></i> <p>Usuários</p></a></li>
+                        @can('read_roles')
+                            <li class="nav-item"><a href="{{ route('roles.index') }}" class="nav-link my-2 text-white"><i class="nav-icon fas fa-plus-square"></i> <p>Papéis</p></a></li>
+                        @endcan
+
+                        @can('read_users')
+                            <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link my-2 text-white"><i class="nav-icon fas fa-user-alt"></i> <p>Usuários</p></a></li>
+                        @endcan
                     </ul>
 
                 </nav>
