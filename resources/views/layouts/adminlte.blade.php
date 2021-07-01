@@ -84,13 +84,12 @@
                             </a>
                         </li>
 
-                        <li class="nav-header">PERMISSÕES</li>
-                        @can('read_roles')
-                            <li class="nav-item"><a href="{{ route('roles.index') }}" class="nav-link my-2 text-white"><i class="nav-icon fas fa-plus-square"></i> <p>Papéis</p></a></li>
-                        @endcan
-
                         @can('read_users')
                             <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link my-2 text-white"><i class="nav-icon fas fa-user-alt"></i> <p>Usuários</p></a></li>
+                        @endcan
+
+                        @can('read_roles')
+                            <li class="nav-item"><a href="{{ route('roles.index') }}" class="nav-link my-2 text-white"><i class="nav-icon fas fa-plus-square"></i> <p>Papéis</p></a></li>
                         @endcan
                     </ul>
 
