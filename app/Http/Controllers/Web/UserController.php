@@ -7,20 +7,16 @@ use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
-use App\Services\UserService;
+use App\Services\Users\ListUserService;
+use App\Services\Users\StoreUserService;
+use App\Services\Users\UpdateUserService;
+use App\Services\Users\DestroyUserService;
 
 class UserController extends Controller
 {
-    private $userService;
-
-    public function __construct()
-    {
-        $this->userService = new UserService();
-    }
-
     public function index()
     {
-        $users = $this->userService->index(
+        $users = (new ListUserService())->run(
             request()->query(),
             ['role']
         );
@@ -33,7 +29,7 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $storeUserRequest)
     {
-        $user = $this->userService->store($storeUserRequest->validated());
+        $user = (new StoreUserService())->run($storeUserRequest->validated());
 
         session()->flash('success', 'Usuário criado com sucesso !');
 
@@ -52,7 +48,7 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $updateUserRequest, User $user)
     {
-        $user = $this->userService->update($user, $updateUserRequest->validated());
+        $user = (new UpdateUserService())->update($user, $updateUserRequest->validated());
 
         session()->flash('success', 'Usuário atualizado com sucesso !');
 
@@ -61,7 +57,7 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        $this->userService->destroy($user);
+        (new DestroyUserService())->destroy($user);
 
         session()->flash('success', 'Usuário deletado com sucesso !');
 
