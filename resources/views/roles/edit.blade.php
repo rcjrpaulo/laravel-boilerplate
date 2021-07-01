@@ -14,10 +14,33 @@
             </div>
         </div>
     </div>
-    <div class="content">
-        <div class="container-fluid">
-
-            <h1>Roles</h1>
+    <div class="card card-light">
+        <div class="card-header">
+            <h3 class="card-title">Ver papel</h3>
         </div>
+        <form action="{{ route('roles.update', $role) }}" method="POST" enctype="multipart/form-data" role="form">
+            @csrf
+            @method('PUT')
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <input value="{{ $role->name }}" type="text" id="name" name="name" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="label">Label</label>
+                    <input value="{{ $role->label }}" type="text" id="label" name="label" class="form-control" required>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ route('roles.index') }}" class="btn btn-primary">
+                    Voltar
+                </a>
+
+                <button type="submit" class="btn btn-success">
+                    Salvar
+                </button>
+            </div>
+        </form>
     </div>
 @endsection
