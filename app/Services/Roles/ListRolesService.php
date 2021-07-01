@@ -16,7 +16,7 @@ class ListRolesService
             'unexpected_error_message' => 'Oops ! Houve um problema ao tentar listar papéis',
         ]);
 
-        return Role::filterByLabel(Arr::get($filters, 'name'))
+        return Role::filterByLabel(Arr::get($filters, 'label'))
             ->with($relations)
             ->when(
                 $pagination,
