@@ -70,7 +70,7 @@
                     </div>
                     <div class="info">
                         <a href="#" class="d-block" data-toggle="modal" data-target="#userPhotoModal">
-                            admin
+                            {{ auth()->user()->name ?? 'Usuário não encontrado' }}
                         </a>
                     </div>
                 </div>
