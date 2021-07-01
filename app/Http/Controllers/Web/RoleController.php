@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Role\StoreRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
+use App\Models\Permission;
 use App\Models\Role;
 use App\Services\Roles\DestroyRolesService;
 use App\Services\Roles\ListRolesService;
 use App\Services\Roles\StoreRolesService;
 use App\Services\Roles\UpdateRolesService;
-use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -46,7 +46,10 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        return view('roles.edit', compact('role'));
+        $groupPermissions = Permission::get()->groupBy('group_label');
+        $role = $role->load('permissions');
+
+        return view('roles.edit', compact('role', 'groupPermissions'));
     }
 
     public function update(UpdateRoleRequest $updateRoleRequest, Role $role)

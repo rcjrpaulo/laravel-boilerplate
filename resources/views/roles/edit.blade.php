@@ -43,4 +43,34 @@
             </div>
         </form>
     </div>
+
+    <div class="card card-light">
+        <div class="card-header">
+            <h3 class="card-title">Permissões</h3>
+        </div>
+        <form action="{{ route('roles.update.permissions', $role) }}" method="POST">
+            @csrf
+            <div class="row card-body">
+                @foreach($groupPermissions as $group => $permissions)
+                    <p>{{ $group }}</p>
+                    @foreach($permissions as $permission)
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input {{ in_array($permission->id, $role->permissions->pluck('id')->toArray()) ? 'checked' : '' }} class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->id }}" id="permission_{{ $permission->id }}">
+                                <label class="form-check-label" for="permission_{{ $permission->id }}">
+                                    {{ $permission->label }}
+                                </label>
+                            </div>
+                        </div>
+                    @endforeach
+                @endforeach
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success">
+                    Salvar
+                </button>
+            </div>
+        </form>
+    </div>
 @endsection
