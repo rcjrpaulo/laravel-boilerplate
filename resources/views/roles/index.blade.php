@@ -46,9 +46,11 @@
                     <div class="card p-4">
                         <div class="card-header">
                             <h3 class="card-title">Papéis</h3> <div class="card-tools">
-                                <a href="{{ route('roles.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>
-                                    Adicionar
-                                </a>
+                                @can('create_roles')
+                                    <a href="{{ route('roles.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>
+                                        Adicionar
+                                    </a>
+                                @endcan
                             </div>
                         </div>
                         <div class="card-body table-responsive p-0">
@@ -71,12 +73,17 @@
                                         <td>{{ $role->created_at->format('d/m/Y') }}</td>
                                         <td>
                                             <a title="Ver" href="{{ route('roles.show', $role) }}" class="btn btn-sm btn-outline-primary"><i class="fa fa-eye"></i></a>
-                                            <a title="Editar" href="{{ route('roles.edit', $role) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></a>
-                                            <form action="{{ route('roles.destroy', $role) }}" method="POST" style="display: contents">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" title="Deletar" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
-                                            </form>
+                                            @can('update_roles')
+                                                <a title="Editar" href="{{ route('roles.edit', $role) }}" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></a>
+                                            @endcan
+
+                                            @can('delete_roles')
+                                                <form action="{{ route('roles.destroy', $role) }}" method="POST" style="display: contents">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" title="Deletar" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
