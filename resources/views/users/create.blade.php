@@ -56,7 +56,8 @@
                     <div class="preview mt-3"></div>
                 </div>
             </div>
-            <div class="card-footer"><a href="{{ route('users.index') }}" class="btn btn-primary">
+            <div class="card-footer">
+                <a href="{{ route('users.index') }}" class="btn btn-primary">
                     Voltar
                 </a>
                 <button type="submit" class="btn btn-success">
