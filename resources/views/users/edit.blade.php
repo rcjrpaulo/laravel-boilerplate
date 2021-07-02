@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="preview mt-3">
-                        <img src="{{ auth()->user()->photoUrl ?? 'images/profile.png' }}" width="70" height="70" alt="User Image" class="img-circle elevation-2 mx-auto">
+                        <img src="{{ $user->photoUrl ?? 'images/profile.png' }}" width="70" height="70" alt="User Image" class="img-circle elevation-2 mx-auto">
                     </div>
                 </div>
             </div>
