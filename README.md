@@ -17,6 +17,9 @@ $ npm install && npm run dev
 # gere a chave para seu arquivo .env
 $ php artisan key:generate
 
+# configure o atalho do storage para a pasta public
+$ php artisan storage:link
+
 # rode migrations e seeds
 $ php artisan migrate:fresh --seed
 
