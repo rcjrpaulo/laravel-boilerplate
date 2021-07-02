@@ -64,6 +64,7 @@ class Handler extends ExceptionHandler
                 $this->storeExceptionInBootbox($e);
             }
 
+            $unexpectedErrorMessage = app()->environment() == 'local' ? $e->getMessage() : 'Houve um erro inesperado';
             if ($request->is('api/*')) {
                 if ($exceptionClass == 'Illuminate\Auth\AuthenticationException') {
                     return response()->json(['error' => $e->getMessage()], 401);
@@ -88,7 +89,8 @@ class Handler extends ExceptionHandler
                     return response()->json(['error' => $e->getMessage()], 500);
                 }
 
-                return response()->json(['error' => request()->get('unexpected_error_message', 'Houve um erro inesperado')], $statusCode);
+                return response()->json(['error' => request()->get('unexpected_error_message',
+                    $unexpectedErrorMessage)], $statusCode);
             }
 
 
@@ -99,7 +101,8 @@ class Handler extends ExceptionHandler
             if ($exceptionClass != 'Illuminate\Validation\ValidationException' && $exceptionClass != 'Illuminate\Auth\AuthenticationException') {
 
                 if ($exceptionClass != 'App\Exceptions\WebResponseNotifyClientException') {
-                    session()->flash('error', request()->get('unexpected_error_message', 'Houve um erro inesperado'));
+                    session()->flash('error', request()->get('unexpected_error_message',
+                        $unexpectedErrorMessage));
                 }
 
                 return response()->view('errors.error', [], 500);
@@ -111,6 +114,7 @@ class Handler extends ExceptionHandler
             $this->storeExceptionInBootbox($e);
             $exceptionClass = get_class($e);
 
+            $unexpectedErrorMessage = app()->environment() == 'local' ? $e->getMessage() : 'Houve um erro inesperado';
             if (request()->is('api/*')) {
                 $statusCode = method_exists($e, 'getCode') && !empty($e->getCode()) ? $e->getCode() : 500;
                 $statusCode = $statusCode > 500 ? 500 : $statusCode;
@@ -123,7 +127,8 @@ class Handler extends ExceptionHandler
                     return response()->json(['error' => $e->getMessage()], 500);
                 }
 
-                return response()->json(['error' => request()->get('unexpected_error_message', 'Houve um erro inesperado')], $statusCode);
+                return response()->json(['error' => request()->get('unexpected_error_message',
+                    $unexpectedErrorMessage)], $statusCode);
             }
 
             if ($exceptionClass == 'App\Exceptions\WebResponseNotifyClientException') {
@@ -133,7 +138,8 @@ class Handler extends ExceptionHandler
             if ($exceptionClass != 'Illuminate\Validation\ValidationException' && $exceptionClass != 'Illuminate\Auth\AuthenticationException') {
 
                 if ($exceptionClass != 'App\Exceptions\WebResponseNotifyClientException') {
-                    session()->flash('error', request()->get('unexpected_error_message', 'Houve um erro inesperado'));
+                    session()->flash('error', request()->get('unexpected_error_message',
+                        $unexpectedErrorMessage));
                 }
 
                 return response()->view('errors.error', [], 500);
