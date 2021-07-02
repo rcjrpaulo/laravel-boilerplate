@@ -92,6 +92,10 @@
                                 @endforeach
                                 </tbody>
                             </table>
+
+                            <div class="mt-6 -mb-1 flex flex-wrap">
+                                {{ $users->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>

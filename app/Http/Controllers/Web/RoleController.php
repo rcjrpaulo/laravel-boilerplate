@@ -21,7 +21,9 @@ class RoleController extends Controller
 
         $roles = (new ListRolesService())->run(
             request()->query(),
-            []
+            [],
+            request()->get('pagination', true),
+            request()->get('items_per_page', 20)
         );
 
         return view('roles.index', compact('roles'));

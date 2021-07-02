@@ -89,6 +89,10 @@
                                 @endforeach
                                 </tbody>
                             </table>
+
+                            <div class="mt-6 -mb-1 flex flex-wrap">
+                                {{ $roles->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>

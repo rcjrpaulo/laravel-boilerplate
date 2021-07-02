@@ -20,7 +20,9 @@ class UserController extends Controller
 
         $users = (new ListUserService())->run(
             request()->query(),
-            ['role']
+            ['role'],
+            request()->get('pagination', true),
+            request()->get('items_per_page', 20)
         );
 
         return view('users.index', compact('users'));
