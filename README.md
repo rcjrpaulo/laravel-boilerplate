@@ -1,62 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Laravel Boilerplate
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Como rodar
 
-## About Laravel
+```bash
+# na raíz do projeto faça um arquivo .env com base no exemplo 
+$ cp .env.example .env
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# no .env configure as credenciais do seu banco
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# instale as dependências PHP
+$ composer install
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# instale as dependências javascript
+$ npm install && npm run dev
 
-## Learning Laravel
+# gere a chave para seu arquivo .env
+$ php artisan key:generate
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# rode migrations e seeds
+$ php artisan migrate:fresh --seed
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# inicie seu projeto
+$ php artisan serve
 
-## Laravel Sponsors
+#acesse: http://127.0.0.1:8000
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+## Features do Boilerplate
+<ul>
+    <li>
+        Pacotes para gerar migrations, models e factories a partir de banco existente
+        <ul>
+            <li><a href="https://github.com/kitloong/laravel-migrations-generator">laravel-migrations-generator</a></li>
+            <li><a href="https://github.com/reliese/laravel">Reliese Laravel Model Generator</a></li>
+            <li><a href="https://github.com/TheDoctor0/laravel-factory-generator">laravel-factory-generator</a></li>
+        </ul>
+    </li>
+    <li>
+        Laravel Sail <a href="https://laravel.com/docs/8.x/sail">Link</a>
+    </li>
+    <li>
+        Laravel Sanctum pronto para uso (rotas feitas no api.php) <a href="https://laravel.com/docs/8.x/sanctum">Link</a>
+    </li>
+    <li>
+        Autenticação com Laravel Breeze <a href="https://laravel.com/docs/8.x/starter-kits">Link</a>
+        <ul>
+            <li>Comando para criar autenticação com blade: <b>php artisan breeze:install</b></li>
+            <li>Comando para criar autenticação com inertia/vue: <b>php artisan breeze:install vue</b></li>
+        </ul>
+    </li>
+    <li>
+        Debug Bar <a href="https://github.com/barryvdh/laravel-debugbar">Link</a>
+    </li>
+    <li>
+        Gerando erro ao acessar relacionamento sem eager loading <a href="https://laravel.com/docs/8.x/eloquent-relationships#preventing-lazy-loading">Link</a>
+    </li>
+    <li>
+        Admin LTE 3 <a href="https://adminlte.io/themes/v3/">Link</a>
+    </li>
+    <li>
+        Resources traduzidos para pt_BR (Form Requests e outras mensagens)
+    </li>
+    <li>
+        Tratando todos os erros por meio do Handler.php  (app/Exceptions/Handler.php)
+    </li>
+    <li>
+        Componente para mostrar as mensagens do tipo success, error e warning (session()->flash('erro', 'mensagem de erro'))
+    </li>
+    <li>
+        Fazendo os Gates de permissões automático no AuthServiceProvider.php por meio da tabela permissions (@can e $this->authorize)
+    </li>
+    <li>
+        Factories e Seeders de Users, Roles e Permissions feitas
+    </li>
+    <li>
+        Testes de Features feitos de Users e Roles
+    </li>
+    <li>
+        Exemplo de Storage (salvando e apagando) feito na atualização e criação de usuário (salvando ou trocando foto de perfil do usuário)
+    </li>
+    <li>
+        Exemplo de relacionamento many-to-many feito no RoleController (na tela de atualizar Papel) para associar permissões a um papel ($role->permissions()->sync($arrayDePermissions))
+    </li>
+    <li>
+        Exemplo de paginação feita usando o bootstrap 4 (usado no Admin LTE 3), podendo alterar número de itens por página e filtro por nome ou label
+    </li>
+    <li>
+        Classe feita (<b>confirm-delete</b>) para formulários que precisam confirmar ação de deletar usando Sweet Alert
+    </li>
+</ul>
