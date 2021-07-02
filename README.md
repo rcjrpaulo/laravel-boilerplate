@@ -28,6 +28,7 @@ $ php artisan serve
 ```
 ## Features do Boilerplate
 <ul>
+    <li>Backend com Services, Form Requests com padrão de projeto já feito</li>
     <li>
         Pacotes para gerar migrations, models e factories a partir de banco existente
         <ul>
@@ -86,6 +87,6 @@ $ php artisan serve
         Exemplo de paginação feita usando o bootstrap 4 (usado no Admin LTE 3), podendo alterar número de itens por página e filtro por nome ou label
     </li>
     <li>
-        Classe feita (<b>confirm-delete</b>) para formulários que precisam confirmar ação de deletar usando Sweet Alert
+        Classe CSS feita (<b>confirm-delete</b>) para formulários (tag form) que precisam confirmar ação de deletar usando Sweet Alert
     </li>
 </ul>
