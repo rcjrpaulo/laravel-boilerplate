@@ -79,7 +79,7 @@ class RoleController extends Controller
 
         session()->flash('success', 'Papel deletado com sucesso !');
 
-        return redirect(route('users.index'));
+        return redirect(route('roles.index'));
     }
 
     public function updatePermissions(Role $role)
