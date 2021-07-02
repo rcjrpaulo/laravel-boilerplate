@@ -42,10 +42,7 @@ class UserControllerTest extends TestCase
     /** @test */
     public function listar_usuarios()
     {
-        $usuario = User::factory()->create();
-        User::factory()->count(2)->create();
-
-        $response = $this->get(route('users.index'))
+        $this->get(route('users.index'))
             ->assertStatus(200);
     }
 
