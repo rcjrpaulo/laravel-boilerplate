@@ -180,6 +180,27 @@
 <script src="{{asset('dist/js/pages/dashboard.js')}}" defer></script>
 
 @stack('js')
+<script>
+    const forms = document.getElementsByClassName('confirm-delete')
+    for (let form of forms) {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault()
+
+            Swal.fire({
+                title: 'Você tem certeza ?',
+                text: 'Você está prestes a excluir um registro.',
+                icon: 'error',
+                showDenyButton: true,
+                confirmButtonText: 'Sim',
+                denyButtonText: 'Não'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            })
+        });
+    }
+</script>
 
 </body>
 
