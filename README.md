@@ -35,7 +35,7 @@ $ php artisan serve
 #### Backend com Services, Form Requests com padrão de projeto já feito
 #### Pacotes para gerar migrations, models e factories a partir de banco existente
 #### Laravel Migrations Generator: https://github.com/kitloong/laravel-migrations-generator
-#### >Reliese Laravel Model Generator: https://github.com/reliese/laravel
+#### Reliese Laravel Model Generator: https://github.com/reliese/laravel
 #### Laravel Factory Generator: https://github.com/TheDoctor0/laravel-factory-generator
 #### Laravel Sail: https://laravel.com/docs/8.x/sail
 #### Laravel Sanctum pronto para uso (rotas feitas no api.php). Feito os métodos de cadastrar, logar, deslogar, deslogar de todos os dispositivos e retornar usuário logado: https://laravel.com/docs/8.x/sanctum
