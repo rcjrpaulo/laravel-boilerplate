@@ -42,7 +42,7 @@ $ php artisan serve
 #### Autenticação com Laravel Breeze: https://laravel.com/docs/8.x/starter-kits
 #### Comando para criar autenticação com blade:
 ```php artisan breeze:install```
-#### >Comando para criar autenticação com inertia/vue
+#### Comando para criar autenticação com inertia/vue
 ```php artisan breeze:install vue```
 #### Debug Bar: https://github.com/barryvdh/laravel-debugbar
 #### Gerando erro ao acessar relacionamento sem eager loading: https://laravel.com/docs/8.x/eloquent-relationships#preventing-lazy-loading
