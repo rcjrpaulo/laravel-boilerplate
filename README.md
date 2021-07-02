@@ -29,70 +29,38 @@ $ php artisan serve
 #acesse: http://127.0.0.1:8000
 
 ```
+
 ## Features do Boilerplate
-<ul>
-    <li>Backend com Services, Form Requests com padrão de projeto já feito</li>
-    <li>
-        Pacotes para gerar migrations, models e factories a partir de banco existente
-        <ul>
-            <li><a href="https://github.com/kitloong/laravel-migrations-generator">laravel-migrations-generator</a></li>
-            <li><a href="https://github.com/reliese/laravel">Reliese Laravel Model Generator</a></li>
-            <li><a href="https://github.com/TheDoctor0/laravel-factory-generator">laravel-factory-generator</a></li>
-        </ul>
-    </li>
-    <li>
-        Laravel Sail <a href="https://laravel.com/docs/8.x/sail">Link</a>
-    </li>
-    <li>
-        Laravel Sanctum pronto para uso (rotas feitas no api.php) <a href="https://laravel.com/docs/8.x/sanctum">Link</a>
-    </li>
-    <li>
-        Autenticação com Laravel Breeze <a href="https://laravel.com/docs/8.x/starter-kits">Link</a>
-        <ul>
-            <li>Comando para criar autenticação com blade: <b>php artisan breeze:install</b></li>
-            <li>Comando para criar autenticação com inertia/vue: <b>php artisan breeze:install vue</b></li>
-        </ul>
-    </li>
-    <li>
-        Debug Bar <a href="https://github.com/barryvdh/laravel-debugbar">Link</a>
-    </li>
-    <li>
-        Gerando erro ao acessar relacionamento sem eager loading <a href="https://laravel.com/docs/8.x/eloquent-relationships#preventing-lazy-loading">Link</a>
-    </li>
-    <li>
-        Admin LTE 3 <a href="https://adminlte.io/themes/v3/">Link</a>
-    </li>
-    <li>
-        Instalado o pacote predis e configurado database.php para rodar com redis facilmente
-    </li>
-    <li>
-        Resources traduzidos para pt_BR (Form Requests e outras mensagens)
-    </li>
-    <li>
-        Tratando todos os erros por meio do Handler.php  (app/Exceptions/Handler.php)
-    </li>
-    <li>
-        Componente para mostrar as mensagens do tipo success, error e warning (session()->flash('erro', 'mensagem de erro'))
-    </li>
-    <li>
-        Fazendo os Gates de permissões automático no AuthServiceProvider.php por meio da tabela permissions (@can e $this->authorize)
-    </li>
-    <li>
-        Factories e Seeders de Users, Roles e Permissions feitas
-    </li>
-    <li>
-        Testes de Features feitos de Users e Roles
-    </li>
-    <li>
-        Exemplo de Storage (salvando e apagando) feito na atualização e criação de usuário (salvando ou trocando foto de perfil do usuário)
-    </li>
-    <li>
-        Exemplo de relacionamento many-to-many feito no RoleController (na tela de atualizar Papel) para associar permissões a um papel ($role->permissions()->sync($arrayDePermissions))
-    </li>
-    <li>
-        Exemplo de paginação feita usando o bootstrap 4 (usado no Admin LTE 3), podendo alterar número de itens por página e filtro por nome ou label
-    </li>
-    <li>
-        Classe CSS feita (<b>confirm-delete</b>) para formulários (tag form) que precisam confirmar ação de deletar usando Sweet Alert
-    </li>
-</ul>
+
+#### Backend com Services, Form Requests com padrão de projeto já feito
+#### Pacotes para gerar migrations, models e factories a partir de banco existente
+#### Laravel Migrations Generator: https://github.com/kitloong/laravel-migrations-generator
+#### >Reliese Laravel Model Generator: https://github.com/reliese/laravel
+#### Laravel Factory Generator: https://github.com/TheDoctor0/laravel-factory-generator
+#### Laravel Sail: https://laravel.com/docs/8.x/sail
+#### Laravel Sanctum pronto para uso (rotas feitas no api.php). Feito os métodos de cadastrar, logar, deslogar, deslogar de todos os dispositivos e retornar usuário logado: https://laravel.com/docs/8.x/sanctum
+#### Autenticação com Laravel Breeze: https://laravel.com/docs/8.x/starter-kits
+#### Comando para criar autenticação com blade:
+```php artisan breeze:install```
+#### >Comando para criar autenticação com inertia/vue
+```php artisan breeze:install vue```
+#### Debug Bar: https://github.com/barryvdh/laravel-debugbar
+#### Gerando erro ao acessar relacionamento sem eager loading: https://laravel.com/docs/8.x/eloquent-relationships#preventing-lazy-loading
+#### Admin LTE 3: https://adminlte.io/themes/v3/
+#### Instalado o pacote predis e configurado database.php para rodar com redis facilmente
+#### Resources traduzidos para pt_BR (Form Requests e outras mensagens)
+#### Tratando todos os erros por meio do Handler.php  (app/Exceptions/Handler.php)
+#### Componente Blade já integrado ao adminLTE para mostrar as mensagens do tipo success, error e warning
+``` session()->flash('error', 'mensagem de erro') ```
+#### Fazendo os Gates de permissões automático no AuthServiceProvider.php por meio da tabela permissions
+```
+@can('permissao') html @endcan
+$this->authorize('permissao') // no controller 
+```
+#### Factories e Seeders de Users, Roles e Permissions feitas
+#### Testes de Features feitos de Users e Roles
+#### Exemplo de Storage (salvando e apagando) feito na atualização e criação de usuário (salvando ou trocando foto de perfil do usuário)
+#### Exemplo de relacionamento many-to-many feito no RoleController (na tela de atualizar Papel) para associar permissões a um papel ($role->permissions()->sync($arrayDePermissions))
+#### Exemplo de paginação feita usando o bootstrap 4 (usado no Admin LTE 3), podendo alterar número de itens por página e filtro por nome ou label
+#### Classe CSS feita (<b>confirm-delete</b>) para formulários (tag form) que precisam confirmar ação de deletar usando Sweet Alert, exemplo:
+``` <form class="confirm-delete" action="#" method="GET"> ... </form> ```
