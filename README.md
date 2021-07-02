@@ -60,6 +60,9 @@ $ php artisan serve
         Admin LTE 3 <a href="https://adminlte.io/themes/v3/">Link</a>
     </li>
     <li>
+        Instalado o pacote predis e configurado database.php para rodar com redis facilmente
+    </li>
+    <li>
         Resources traduzidos para pt_BR (Form Requests e outras mensagens)
     </li>
     <li>
