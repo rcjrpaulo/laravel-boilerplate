@@ -26,16 +26,24 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-10">
                                         <div class="form-group">
-                                            <label for="filter_name">Label</label>
+                                            <label for="label">Label</label>
                                             <input name="label" id="label" type="text" class="form-control" value="{{ request()->get('label', '') }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label for="items_per_page">Itens por página</label>
+                                            <input name="items_per_page" id="items_per_page" type="number" min="1" class="form-control" value="{{ request()->get('items_per_page', '20') }}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-info text-center">Filtrar</button>
+                                <a href="{{ route('roles.index') }}" class="btn btn-warning">Limpar</a>
                             </div>
                         </form>
                     </div>
